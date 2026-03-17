@@ -5,9 +5,9 @@ public class Circle2D {
     private double radius;
 
     public Circle2D(String name, double centerY, double centerX, double radius) {
-        this.name = name;
         this(centerY, centerX, radius);
-    }
+        this.name = name;
+}
 
     public Circle2D(double centerY, double centerX, double radius) {
         this.name = "";
@@ -82,14 +82,24 @@ public class Circle2D {
         return Circle2D.centerDistance(this, x2) == this.radius + x2.radius;
     }
 
+    public void checkCondition(Circle2D x2){
+        if (this.isIntersecting(x2)){
+            System.out.println(this.name + " is intersecting " + x2.name);
+        } else if (this.isInside(x2)) {
+            System.out.println(this.name + " is inside " + x2.name);
+        } else if (this.isTouching(x2)) {
+            System.out.println(this.name + " is touching " + x2.name);
+        }
+    }
+
     static void main() {
-        Circle2D circle1 = new Circle2D(0, 0, 1);
-        Circle2D circle2 = new Circle2D(1, 0, 1);
+        Circle2D circle1 = new Circle2D("A", 0, 0, 1);
+        Circle2D circle2 = new Circle2D("B", 1, 0, 1);
 
         System.out.println(circle1.toString());
         System.out.println(circle1.getArea());
 
         System.out.println(Circle2D.centerDistance(circle1, circle2));
-        System.out.println(circle1.isTouching(circle2));
+        circle1.checkCondition(circle2);
     }
 }
